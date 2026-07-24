@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{{ page_title }} - PhotoFlow Print</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}" />
+  <style>
+    .auth-wrap {
+      min-height: calc(100vh - 140px);
+      display: grid;
+      place-items: center;
+      padding: 24px;
+    }
+    .auth-card {
+      width: min(520px, 100%);
+      background: rgba(17, 24, 39, 0.92);
+      border: 1px solid #1f2937;
+      border-radius: 16px;
+      padding: 20px;
+      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.35);
+    }
+    .auth-card h1 {
+      margin: 0 0 8px;
+      font-size: 1.6rem;
+    }
+    .auth-card p {
+      color: #94a3b8;
+      margin: 0 0 16px;
+    }
+    .auth-field {
+      margin-bottom: 12px;
+    }
+    .auth-field label {
+      display: block;
+      margin-bottom: 6px;
+      color: #94a3b8;
+    }
+    .auth-field input {
+      width: 100%;
+      padding: 10px;
+      border-radius: 10px;
+      border: 1px solid #334155;
+      background: #0b1220;
+      color: #e5e7eb;
+    }
+    .auth-actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 8px;
+    }
+    .secondary-link {
+      text-decoration: none;
+      color: #38bdf8;
+      align-self: center;
+    }
+  </style>
+</head>
+<body>
+  <header class="navbar">
+    <div class="logo">🖼️ PhotoFlow Print</div>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="{{ url_for('profile') }}">Profile</a></li>
+        <li><a href="{{ url_for('login') }}">Login</a></li>
+        <li><a href="{{ url_for('create_account') }}">Create Account</a></li>
+        <li><a href="{{ url_for('signup') }}">Sign Up</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="auth-wrap">
+    <section class="auth-card">
+      <h1>{{ heading }}</h1>
+      <p>{{ subtitle }}</p>
+      {% if error %}
+      <p class="error">{{ error }}</p>
+      {% endif %}
+      {% if message %}
+      <p style="color:#22c55e; margin-top: 0;">{{ message }}</p>
+      {% endif %}
+      {% block content %}{% endblock %}
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>© 2026 PhotoFlow Print Studio • Modern passport workflow solution</p>
+  </footer>
+</body>
+</html>

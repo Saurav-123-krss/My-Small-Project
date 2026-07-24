@@ -1,0 +1,17 @@
+{% extends "auth_base.html" %}
+{% block content %}
+<form method="POST" action="{{ url_for('signup') }}">
+  <div class="auth-field">
+    <label for="phone">Phone Number</label>
+    <input id="phone" name="phone" type="tel" placeholder="+91XXXXXXXXXX" required />
+  </div>
+  <div class="auth-field">
+    <label for="email">Email</label>
+    <input id="email" name="email" type="email" placeholder="name@example.com" required />
+  </div>
+  <div class="auth-actions">
+    <button type="submit" class="btn primary">Sign Up</button>
+    <a class="secondary-link" href="{{ url_for('login') }}">Go to login</a>
+  </div>
+</form>
+{% endblock %}

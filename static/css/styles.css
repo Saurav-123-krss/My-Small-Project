@@ -1,0 +1,263 @@
+:root {
+  --bg: #0f172a;
+  --card: #111827;
+  --accent: #38bdf8;
+  --accent-2: #22c55e;
+  --text: #e5e7eb;
+  --muted: #94a3b8;
+  --danger: #f87171;
+  --border: #1f2937;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", Roboto, Arial, sans-serif;
+  color: var(--text);
+  background: radial-gradient(circle at top right, #1e293b 0%, #0b1020 45%, #020617 100%);
+  min-height: 100vh;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 40px;
+  border-bottom: 1px solid var(--border);
+  backdrop-filter: blur(6px);
+}
+
+.logo {
+  font-size: 1.2rem;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+}
+
+.nav-links {
+  display: flex;
+  gap: 16px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: var(--text);
+  padding: 8px 12px;
+  border-radius: 10px;
+  transition: 0.2s ease;
+}
+
+.nav-links a:hover {
+  background: #1e293b;
+  color: var(--accent);
+}
+
+.hero {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 22px;
+  padding: 28px 34px;
+}
+
+.hero-left h1 {
+  margin: 8px 0 10px;
+  font-size: 2rem;
+}
+
+.hero-left p {
+  margin: 0 0 20px;
+  color: var(--muted);
+}
+
+.counter-card {
+  background: rgba(17, 24, 39, 0.9);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 12px 14px;
+  width: fit-content;
+  margin-bottom: 16px;
+}
+
+.counter-label {
+  color: var(--muted);
+  margin-right: 8px;
+}
+
+.counter-value {
+  color: var(--accent-2);
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+.upload-card,
+.preview-card {
+  background: rgba(17, 24, 39, 0.92);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 16px;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.35);
+}
+
+.field-label {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--muted);
+}
+
+input[type="file"] {
+  width: 100%;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px dashed #334155;
+  background: #0b1220;
+  color: var(--text);
+  margin-bottom: 14px;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.field label {
+  display: block;
+  margin-bottom: 6px;
+  color: var(--muted);
+}
+
+select {
+  width: 100%;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #334155;
+  background: #0b1220;
+  color: var(--text);
+}
+
+.btn {
+  border: none;
+  padding: 10px 14px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.btn.primary {
+  background: linear-gradient(90deg, #0ea5e9, #22c55e);
+  color: #04111d;
+}
+
+.preview-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.print-btn {
+  background: #1e293b;
+  color: var(--text);
+  border: 1px solid #334155;
+}
+
+.meta {
+  color: var(--muted);
+  margin: 10px 0;
+}
+
+.print-sheet {
+  background: white;
+  color: #111;
+  border-radius: 10px;
+  min-height: 320px;
+  padding: 14px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(95px, 1fr));
+  gap: 14px; /* spacing for proper manual cropping */
+  align-content: start;
+}
+
+.photo-cell {
+  border: 1px dashed #94a3b8;
+  padding: 4px;
+  border-radius: 6px;
+  background: #f8fafc;
+}
+
+.photo-cell img {
+  width: 100%;
+  aspect-ratio: 35 / 45;
+  object-fit: cover;
+  display: block;
+  border-radius: 4px;
+}
+
+.empty-state {
+  color: var(--muted);
+  background: #0b1220;
+  border: 1px dashed #334155;
+  border-radius: 10px;
+  padding: 20px;
+}
+
+.error {
+  color: var(--danger);
+  margin-top: 10px;
+}
+
+.footer {
+  margin-top: 20px;
+  border-top: 1px solid var(--border);
+  padding: 16px;
+  text-align: center;
+  color: var(--muted);
+}
+
+@media (max-width: 900px) {
+  .hero {
+    grid-template-columns: 1fr;
+  }
+
+  .nav-links {
+    flex-wrap: wrap;
+    justify-content: flex-end;
+  }
+}
+
+@media print {
+  body {
+    background: #fff;
+    color: #000;
+  }
+
+  .navbar,
+  .hero-left,
+  .footer,
+  .preview-header,
+  .meta {
+    display: none !important;
+  }
+
+  .hero,
+  .hero-right,
+  .preview-card {
+    display: block;
+    padding: 0;
+    margin: 0;
+    border: none;
+    box-shadow: none;
+    background: #fff;
+  }
+
+  .print-sheet {
+    gap: 16px;
+    padding: 0;
+    min-height: auto;
+  }
+}

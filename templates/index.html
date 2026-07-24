@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Passport Photo Workflow</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}" />
+</head>
+<body>
+  <header class="navbar">
+    <div class="logo">🖼️ PhotoFlow Print</div>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="{{ url_for('profile') }}">Profile</a></li>
+        <li><a href="{{ url_for('login') }}">Login</a></li>
+        <li><a href="{{ url_for('create_account') }}">Create Account</a></li>
+        <li><a href="{{ url_for('signup') }}">Sign Up</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="hero">
+    <section class="hero-left">
+      <h1>Passport Photo Print Automation</h1>
+      <p>
+        Upload one photo, choose prints and page size, generate a clean print-ready
+        layout with spacing for proper cropping.
+      </p>
+
+      <div class="counter-card">
+        <span class="counter-label">Visitor Count</span>
+        <span class="counter-value">{{ visitor_count }}</span>
+      </div>
+
+      <form action="{{ url_for('process') }}" method="POST" enctype="multipart/form-data" class="upload-card">
+        <label class="field-label">Upload Photo</label>
+        <input type="file" name="photo" accept=".png,.jpg,.jpeg,.webp" required />
+
+        <div class="row">
+          <div class="field">
+            <label for="prints">Number of Prints</label>
+            <select id="prints" name="prints">
+              {% for n in [4,6,8,10,12,16,20,24,28,30] %}
+              <option value="{{ n }}" {% if selected_prints == n %}selected{% endif %}>{{ n }}</option>
+              {% endfor %}
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="page_size">Page Size</label>
+            <select id="page_size" name="page_size">
+              {% for size in page_sizes %}
+              <option value="{{ size }}" {% if selected_page_size == size %}selected{% endif %}>{{ size }}</option>
+              {% endfor %}
+            </select>
+          </div>
+        </div>
+
+        <button type="submit" class="btn primary">Generate Layout</button>
+      </form>
+
+      {% if error %}
+      <p class="error">{{ error }}</p>
+      {% endif %}
+    </section>
+
+    <section class="hero-right">
+      <div class="preview-card">
+        <div class="preview-header">
+          <h2>Print Preview</h2>
+          <button class="btn print-btn" onclick="window.print()">🖨️ Print</button>
+        </div>
+
+        {% if uploaded_image %}
+        <p class="meta">
+          Page Size: <strong>{{ selected_page_size }}</strong> |
+          Copies: <strong>{{ selected_prints }}</strong>
+        </p>
+        <div class="print-sheet">
+          {% for _ in range(selected_prints) %}
+          <div class="photo-cell">
+            <img src="{{ uploaded_image }}" alt="Passport photo copy" />
+          </div>
+          {% endfor %}
+        </div>
+        {% else %}
+        <div class="empty-state">
+          Upload a photo and generate your print layout to preview here.
+        </div>
+        {% endif %}
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>© 2026 PhotoFlow Print Studio • Modern passport workflow solution</p>
+  </footer>
+</body>
+</html>

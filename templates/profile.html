@@ -1,0 +1,10 @@
+{% extends "auth_base.html" %}
+{% block content %}
+<div>
+  <p><strong>User:</strong> Guest User</p>
+  <p><strong>Status:</strong> Demo profile page active</p>
+  <div class="auth-actions">
+    <a class="btn primary" href="{{ url_for('home') }}" style="text-decoration:none;">Back to Home</a>
+  </div>
+</div>
+{% endblock %}
